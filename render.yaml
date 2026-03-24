@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: healthy-food-ai
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn src.api.server:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GEMINI_API_KEY
+        scope: build,runtime
+        value: ""
+      - key: MONGODB_URI
+        scope: build,runtime
+        value: ""
+      - key: MONGODB_DB_NAME
+        scope: build,runtime
+        value: "healthy_food_ai"
+      - key: DEBUG
+        scope: build,runtime
+        value: "false"
+      - key: LOG_LEVEL
+        scope: build,runtime
+        value: "INFO"
+    healthCheckPath: /health
+    headers:
+      - path: /
+        name: X-Frame-Options
+        value: sameorigin
+
+databases:
+  - name: mongodb
+    plan: free
+    ipAllowList: []

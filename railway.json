@@ -1,0 +1,38 @@
+{
+  "name": "Healthy Food AI",
+  "description": "AI-powered food recommendation and nutrition analysis system",
+  "runtime": "python@3.11",
+  "builder": "dockerfile",
+  "repo": "https://github.com/your-username/healthy-food-ai",
+  "variables": {
+    "GEMINI_API_KEY": {
+      "description": "Google Gemini API Key",
+      "value": ""
+    },
+    "MONGODB_URI": {
+      "description": "MongoDB connection string (optional, uses fallback if not provided)",
+      "value": "mongodb://localhost:27017/healthy_food_ai"
+    },
+    "MONGODB_DB_NAME": {
+      "description": "MongoDB database name",
+      "value": "healthy_food_ai"
+    },
+    "DEBUG": {
+      "description": "Enable debug mode",
+      "value": "false"
+    },
+    "LOG_LEVEL": {
+      "description": "Logging level",
+      "value": "INFO"
+    }
+  },
+  "services": [
+    {
+      "name": "mongodb",
+      "image": "mongo:latest",
+      "environment": {
+        "MONGO_INITDB_DATABASE": "healthy_food_ai"
+      }
+    }
+  ]
+}
